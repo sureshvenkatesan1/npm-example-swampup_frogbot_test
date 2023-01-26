@@ -27,7 +27,7 @@
       projects:
       # [Mandatory for projects which use npm, yarn 2, nuget and dotnet to download their dependencies]
       # Installation command (e.g. npm i, nuget restore)
-      - installCommand: "npm i"
+      - installCommand: "npmc --repo-resolve ${{ env.JFROG_NPM_ARTIFACTORY_REPO_NAME }} && npm i"
 
       # [Optional, Default: root directory]
       # List of relative path's to the projects directories in the git repository
