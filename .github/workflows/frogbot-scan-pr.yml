@@ -34,12 +34,12 @@ jobs:
 
       # The full template list with the required GitHub Actions can be found at https://github.com/jfrog/frogbot/tree/master/templates/github-actions/scan-pull-request
 
-      - uses: jfrog/frogbot@9304d3b1d8e05a1b5fc0ba9ebf9ffbd495386250
+      - uses: jfrog/frogbot@v2
         env:
           # [Mandatory]
           # JFrog platform URL (This functionality requires version 3.29.0 or above of Xray)
           JF_URL: ${{ secrets.JF_URL }}
-          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          
           # [Mandatory if JF_ACCESS_TOKEN is not provided]
           # JFrog username with 'read' permissions for Xray. Must be provided with JF_PASSWORD
           # JF_USER: ${{ secrets.JF_USER }}
@@ -54,15 +54,16 @@ jobs:
 
           # [Mandatory if JF_USER and JF_PASSWORD are not provided]
           # JFrog access token with 'read' permissions on Xray service
-          # JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          
 
           # [Mandatory when using npm]
           # The command that installs the dependencies
-          JF_INSTALL_DEPS_CMD: "npm i"
+          # JF_INSTALL_DEPS_CMD: "npm i"
 
           # [Optional, default: "FALSE"]
           # Displays all existing vulnerabilities, including the ones that were added by the pull request.
-          JF_INCLUDE_ALL_VULNERABILITIES: "TRUE"
+          # JF_INCLUDE_ALL_VULNERABILITIES: "TRUE"
 
           # [Mandatory when using .NET]
           # The command that installs the dependencies
