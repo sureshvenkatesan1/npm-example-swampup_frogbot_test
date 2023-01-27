@@ -28,7 +28,8 @@
       # [Mandatory for projects which use npm, yarn 2, nuget and dotnet to download their dependencies]
       # Installation command (e.g. npm i, nuget restore)
       # - installCommand: "npmc --repo-resolve ${{ env.JFROG_NPM_ARTIFACTORY_REPO_NAME }} && npm i"
-      - installCommand: "npm i --repo-path s003-npm-remote"
+      # - installCommand: "npm i --repo-path s003-npm-remote"
+      - installCommand: "npm i"
 
       # [Optional, Default: root directory]
       # List of relative path's to the projects directories in the git repository
