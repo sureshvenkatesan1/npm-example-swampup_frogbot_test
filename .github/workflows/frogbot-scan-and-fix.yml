@@ -49,3 +49,5 @@ jobs:
           # [Mandatory if JF_USER and JF_PASSWORD are not provided]
           # JFrog access token with 'read' permissions on Xray service
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          
+          JF_INSTALL_DEPS_CMD: jf npmc --repo-resolve ${{ env.JFROG_NPM_ARTIFACTORY_REPO_NAME }}
