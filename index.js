@@ -3,6 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const _ = require("lodash")
 const mathjs =require("mathjs")
+const angular = require("angular")
 
 const app = express()
 const port = 3000
@@ -45,7 +46,12 @@ const HelloFrogs = {
   message: "🐸 Welcome to SWAMPUP-2021 🐸"
 }
 
+const evilsrc = {__proto__: {evilkey: "evilvalue"}}
+
+
 app.listen(port, () => {
+  angular.merge({}, evilsrc)
+  console.log(angular.version.full)
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
