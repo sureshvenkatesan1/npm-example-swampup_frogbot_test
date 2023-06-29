@@ -50,7 +50,7 @@ jobs:
 
           # [Mandatory]
           # The GitHub token automatically generated for the job
-          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JF_GIT_TOKEN: ${{ secrets.JF_GIT_TOKEN }}
 
           # [Mandatory if JF_USER and JF_PASSWORD are not provided]
           # JFrog access token with 'read' permissions on Xray service
