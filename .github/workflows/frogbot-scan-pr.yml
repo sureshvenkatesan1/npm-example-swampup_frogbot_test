@@ -21,7 +21,7 @@ jobs:
     # "frogbot" GitHub environment can approve the pull request to be scanned.
     environment: frogbot
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
@@ -34,7 +34,7 @@ jobs:
 
       # The full template list with the required GitHub Actions can be found at https://github.com/jfrog/frogbot/tree/master/templates/github-actions/scan-pull-request
 
-      - uses: jfrog/frogbot@9304d3b1d8e05a1b5fc0ba9ebf9ffbd495386250
+      - uses: uses: jfrog/frogbot@v2
         env:
           # [Mandatory]
           # JFrog platform URL (This functionality requires version 3.29.0 or above of Xray)
@@ -42,30 +42,46 @@ jobs:
 
           # [Mandatory if JF_ACCESS_TOKEN is not provided]
           # JFrog username with 'read' permissions for Xray. Must be provided with JF_PASSWORD
-          JF_USER: ${{ secrets.JF_USER }}
+          # JF_USER: ${{ secrets.JF_USER }}
 
           # [Mandatory if JF_ACCESS_TOKEN is not provided]
           # JFrog password. Must be provided with JF_USER
-          JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-
-          # [Mandatory]
-          # The GitHub token automatically generated for the job
-          JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
           # [Mandatory if JF_USER and JF_PASSWORD are not provided]
           # JFrog access token with 'read' permissions on Xray service
-          # JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+          JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
 
+          # [Mandatory]
+          # The GitHub token automatically generated for the job
+          JF_GIT_TOKEN: ${{ secrets.JF_GIT_TOKEN }}
+          
           # [Mandatory when using npm]
           # The command that installs the dependencies
+          # JF_INSTALL_DEPS_CMD: "npm i --repo-path s003-npm-remote"
           JF_INSTALL_DEPS_CMD: "npm i"
-
+          
+          # [Optional, default: "."]
+          # Relative path to the root of the project in the Git repository
+          JF_WORKING_DIR: .
+          
           # [Optional, default: "FALSE"]
           # Displays all existing vulnerabilities, including the ones that were added by the pull request.
           JF_INCLUDE_ALL_VULNERABILITIES: "TRUE"
 
-          # [Mandatory when using .NET]
-          # The command that installs the dependencies
-          # JF_INSTALL_DEPS_CMD: "dotnet restore"
+          # [Optional, default: "TRUE"]
+          # Fails the Frogbot task if any security issue is found.
+          # JF_FAIL: "FALSE"
+
+          # [Optional]
+          # Frogbot will download the project dependencies if they're not cached locally. To download the
+          # dependencies from a virtual repository in Artifactory, set the name of the repository. There's no
+          # need to set this value, if it is set in the frogbot-config.yml file.
+          JF_DEPS_REPO: "s003-npm-remote"
+
+          # [Optional, Default: "FALSE"]
+          # If TRUE, Frogbot creates a single pull request with all the fixes.
+          # If FALSE, Frogbot creates a separate pull request for each fix.
+          JF_GIT_AGGREGATE_FIXES: "TRUE"
 
           # The full template list with full optional environment variables can be found at https://github.com/jfrog/frogbot/tree/master/templates/github-actions/scan-pull-request
